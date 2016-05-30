@@ -1,2 +1,2 @@
 # DevBootCampProject
-Project to calculate the probability as an example to understand TDD
+Project to model Probability as an example to understand and practice TDD
