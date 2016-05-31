@@ -1,4 +1,3 @@
-import org.hamcrest.core.Is;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -83,10 +82,46 @@ public class ProbabilityTest {
 
     @Test
     public void testOperationChaining(){
-        Probability result = new Probability(0.2);
+        Probability result = new Probability(0.654444444211111142109912);
         result = result.negate().negate();
-        Probability probability= new Probability(0.2);
+        Probability probability= new Probability(0.654444444211111142109912);
         Assert.assertTrue(result.equals(probability));
+    }
+
+    @Test
+    public void testUnionOperation(){
+        Probability probability1 = new Probability(0.2);
+        Probability probability2 = new Probability(0.3);
+        Probability expected = new Probability(0.44);
+
+        Assert.assertThat(probability1.union(probability2), is(expected));
+    }
+
+    @Test
+    public void testUnionOperationProbabilityZero(){
+        Probability probability1 = new Probability(0);
+        Probability probability2 = new Probability(1);
+        Probability expected = new Probability(1);
+
+        Assert.assertThat(probability1.union(probability2), is(expected));
+    }
+
+    @Test
+    public void testUnionOperationProbabilityOne(){
+        Probability probability1 = new Probability(1.000000000000000001);
+        Probability probability2 = new Probability(1);
+        Probability expected = new Probability(1);
+
+        Assert.assertThat(probability1.union(probability2), is(expected));
+    }
+
+    @Test
+    public void testUnionOperationProbabilityOneX(){
+        Probability probability1 = new Probability(1);
+        Probability probability2 = new Probability(0.4);
+        Probability expected = new Probability(1);
+
+        Assert.assertThat(probability1.union(probability2), is(expected));
     }
 
 }
